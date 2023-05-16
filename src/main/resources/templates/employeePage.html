@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <title>[[${pageTitle}]]</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Dashboard</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/client/list}">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/employee/list}">Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"  th:href="@{/users}">Users</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+     <div class="container-fluid text-center" style="padding-top: 7rem;">
+         <div class="text-center h2 m-3"><h2>[[${pageTitle}]]</h2></div>
+         <div>
+             <form th:action="@{/employee/save}" method="post" th:object="${employee}" style="max-width: 700px; margin: 0 auto;">
+                 <div class="border border-secondary rounded p-3">
+                     <div class="form-group row">
+                         <label class="col-sm-4 col-form-label">First name</label>
+                         <div class="col-sm-8">
+                             <input type="text" class="form-control" th:field="*{firstname}" required minlength="4">
+                         </div>
+                     </div>
+
+                     <div class="form-group row">
+                         <label class="col-sm-4 col-form-label">Last name</label>
+                         <div class="col-sm-8">
+                             <input type="text" class="form-control" th:field="*{lastname}" required minlength="4">
+                         </div>
+                     </div>
+
+                     <div class="form-group row">
+                         <label class="col-sm-4 col-form-label">Phone</label>
+                         <div class="col-sm-8">
+                             <input type="text" class="form-control" th:field="*{phone}" required minlength="10" maxlength="10">
+                         </div>
+                     </div>
+
+                     <div class="form-group row">
+                         <label class="col-sm-4 col-form-label">Role</label>
+                         <div class="col-sm-1">
+                             <select>
+                                 <option>Select employee Role</option>
+                                 <option th:value="*{role}">cleaner</option>
+                                 <option th:value="*{role}">Assistant</option>
+                                 <option th:value="*{role}">Administrator</option>
+                                 <option th:value="*{role}">Assistant Manager</option>
+                                 <option th:value="*{role}">Manager</option>
+                                 <option th:value="*{role}">CEO</option>
+                             </select>
+                         </div>
+                     </div>
+
+                     <div class="form-group row">
+                         <label class="col-sm-4 col-form-label">Salary</label>
+                         <div class="col-sm-8">
+                             <input type="text" class="form-control" th:field="*{salary}" required minlength="1" th:default="20000" />
+                         </div>
+                     </div>
+
+                     <div class="text-center">
+                         <button type="submit" class="btn btn-primary m-3">Submit</button>
+                         <button type="button" class="btn btn-secondary m-3" onclick="CancelForm()">Cancel</button>
+                         <button type="button" class="btn btn-danger m-3" onclick="ExitForm()">Exit</button>
+                     </div>
+
+                 </div>
+
+             </form>
+         </div>
+
+     </div>
+<script>
+    function CancelForm(){
+        window.location = "/employee/list";
+    }
+
+    function ExitForm(){
+        window.location = "/";
+    }
+</script>
+</body>
+</html>

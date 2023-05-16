@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <title>ClientList</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Dashboard</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/client/list}">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/employee/list}">Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"  th:href="@{/users}">Users</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+   <div class="container-fluid text-center" style="padding-top: 6rem;">
+       <div class="text-center h2" style="color: darkred"><h2>Manage Clients</h2></div>
+       </di>
+       <a class="btn btn-primary m-3" th:href="@{/client/new}">Add New Employee</a>
+   </div>
+       <div th:if="${message}" class="alert alert-success">
+           [[${message}]]
+       </div>
+       <table class="table table-bordered table-hover">
+           <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>No.House</th>
+                    <th>Amount</th>
+                    <th>Is-paid</th>
+                    <th>Action</th>
+                </tr>
+           </thead>
+           <tbody>
+                <th:block th:each="client : ${listClient}">
+                    <tr>
+                        <td>[[${client.id}]]</td>
+                        <td>[[${client.firstname}]]</td>
+                        <td>[[${client.lastname}]]</td>
+                        <td>[[${client.email}]]</td>
+                        <td>[[${client.phone}]]</td>
+                        <td>[[${client.address}]]</td>
+                        <td>[[${client.number_of_house}]]</td>
+                        <td>[[${client.amount_to_be_paid}]]</td>
+                        <td>[[${client.enabled}]]</td>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{'/client/edit/' + ${client.id}}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{'/client/delete/' +${client.id}}">Delete</a>
+                        </td>
+                    </tr>
+                </th:block>
+           </tbody>
+       </table>
+   </div>
+
+   <div class="text-center">
+       <button type="button" class="btn btn-secondary m-3" onclick="ManageUsers()">Users</button>
+       <button type="button" class="btn btn-dark m-3" onclick="ManageEmployee()">Employee</button>
+       <button type="button" class="btn btn-danger m-3" onclick="ExitForm()">Exit</button>
+   </div>
+
+   <script>
+       function ManageUsers(){
+           window.location = "/users";
+       }
+
+       function ExitForm(){
+           window.location = "/";
+       }
+       function ManageEmployee(){
+           window.location = "/employee/list";
+       }
+   </script>
+</body>
+</html>

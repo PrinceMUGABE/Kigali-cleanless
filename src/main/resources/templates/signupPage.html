@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <title>[[${pageTitle}]]</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary text-center">
+    <div class="container-fluid text-center">
+        <a class="navbar-brand" th:href="@{/}">Home</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/signup}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"  th:href="@{/user/login}">Login</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div class="container-fluid text-center" style="padding-top: 6rem;">
+  <h2 class="text-center, h2" style="color: brown">[[${pageTitle}]]</h2>
+  <div class="container-fluid text-center">
+
+      <div th:if="${message}" class="alert alert-success">
+          <lable>[[${message}]]</lable>
+      </div>
+
+    <form th:action="@{/signup}" method="post" th:object="${user}"
+          style="max-width: 500px; margin: 0 auto;">
+        <input type="hidden" class="form-control" name="id" th:field="*{id}">
+
+      <div class="border border-secondary rounded p-3">
+
+         <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Username</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" th:field="*{username}" required minlength="5" />
+            </div>
+         </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+            <input type="email" class="form-control" th:field="*{email}" required />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Password</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" th:field="*{password}" required minlength="5" maxlength="10" />
+          </div>
+        </div>
+
+          <div class="text-center">
+              <button type="submit" class="btn btn-primary m-3">Submit</button>
+              <button type="button" class="btn btn-secondary m-3" onclick="LoginForm()">Login</button>
+              <button type="button" class="btn btn-danger m-3" onclick="cancelForm()">Cancel</button>
+          </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location = "/";
+    }
+    function LoginForm(){
+        window.location = "/user/login";
+    }
+
+</script>
+</body>
+</html>
